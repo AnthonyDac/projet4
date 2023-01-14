@@ -80,9 +80,6 @@ main {
   padding-right: 2vw;
   margin: 1px 20px 15px;
   border-radius: 2rem;
-  text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -155,7 +152,40 @@ main {
 
 .modal-body {
   padding: 15px 8%;
-  margin: 15px auto;
+}
+
+.modal-body form {
+  display: block;
+}
+
+.thanks {
+  width: 100%;
+  height: 80vh;
+  display: none;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.thanksContainer {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.thanksContainer h4 {
+  font-size: 35px;
+  text-align: center;
+}
+
+.thanksContainer button {
+  background: #fe142f;
+  color: white;
+  border: none;
+  padding: 10px 65px;
+  border-radius: 10px;
 }
 
 label {
@@ -171,8 +201,8 @@ input {
   outline: none;
 }
 .warning {
-  font-size: 16px;
-  color: red;
+  font-size: 14px;
+  color: #fe142f;
   line-height: 10px;
   height: fit-content;
   width: fit-content;
