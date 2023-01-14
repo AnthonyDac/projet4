@@ -30,22 +30,71 @@ function closeModal() {
 }
 
 function validate() {
+  let isValid = true;
   let name = document.getElementById('first');
   let lastname = document.getElementById('last');
   let email = document.getElementById('email');
   let date = document.getElementById('birthdate');
   let quantity = document.getElementById('quantity');
   let checkbox = document.getElementById('checkbox1');
+  let consent1 = document.getElementById('consent1');
   let checkedRadio = document.querySelector("input[name='location']:checked");
-  let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if(name.value.length < 2) {alert('Veuillez entrer 2 caractères ou plus pour le champ du prénom.');return false;};
-  if(lastname.value.length < 2) {alert('Veuillez entrer 2 caractères ou plus pour le champ du nom.');return false;};
-  if(!email.value) {alert('Veuillez saisir une adresse mail.');return false;};
-  if(!regex.test(String(email.value).toLowerCase())) {alert('Veuillez saisir une adresse mail valide.'); return false;};
-  if(!date.value) {alert('Vous devez entrer votre date de naissance.');return false;};
-  if(!quantity.value) {alert('Veuillez saisir un nombre de tournois.');return false;};
-  if(!checkedRadio) {alert("Vous devez choisir une option de ville.");return false;}
-  if(!checkbox.checked) {alert('Vous devez vérifier que vous acceptez les termes et conditions.');return false;};
-  alert('Merci ! Votre réservation a été reçue.');
-  return true;
+  let warningRadio = document.getElementById('warningRadio');
+  //let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if(!name.value || name.value < 2) {
+    name.nextElementSibling.innerHTML = name.dataset.error;
+    name.style.border ="2px solid #e54858";
+    return false;
+  } else {
+    name.nextElementSibling.innerHTML = '';
+    name.style.border ="2px solid transparent"; 
+  }
+  if(!lastname.value || lastname.value < 2) {
+    lastname.nextElementSibling.innerHTML = lastname.dataset.error;
+    lastname.style.border ="2px solid #e54858";
+    return false;
+  } else {
+    lastname.nextElementSibling.innerHTML = '';
+    lastname.style.border ="2px solid transparent"; 
+  }
+  if(!email.value) {
+    email.nextElementSibling.innerHTML = email.dataset.error;
+    email.style.border ="2px solid #e54858";
+    return false;
+  } else {
+    email.nextElementSibling.innerHTML = '';
+    email.style.border ="2px solid transparent"; 
+  }
+  if(!date.value) {
+    date.nextElementSibling.innerHTML = date.dataset.error;
+    date.style.border ="2px solid #e54858";
+    return false;
+  } else {
+    date.nextElementSibling.innerHTML = '';
+    date.style.border ="2px solid transparent"; 
+  }
+  if(!quantity.value) {
+    quantity.nextElementSibling.innerHTML = quantity.dataset.error;
+    quantity.style.border ="2px solid #e54858";
+    return false;
+  } else {
+    quantity.nextElementSibling.innerHTML = '';
+    quantity.style.border ="2px solid transparent"; 
+  }
+  if(!checkedRadio) {
+    warningRadio.innerHTML = "Vous devez choisir une option.";
+    return false;
+  } else {
+    warningRadio.innerHTML = '';
+  }
+  if(!checkbox.checked) {
+    consent1.innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions.";
+    return false;
+  } else {
+    consent1.innerHTML = '';
+  }
+  if(isValid) {
+    alert('Merci ! Votre réservation a été reçue.');
+    return true;
+  }
 }
