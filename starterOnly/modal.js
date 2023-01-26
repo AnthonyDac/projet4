@@ -47,7 +47,7 @@ function validate() {
   const borderReset = "2px solid transparent";
   const borderError = "2px solid #e54858";
   const identity = [name,lastname];
-  const informations = [date,quantity]
+  const informations = [date,quantity];
   //Vérification si les nom et prénoms contiennent au moins 2 caractères
   identity.forEach(element => {
     if(element.value < 2) {
@@ -71,8 +71,8 @@ function validate() {
     }
   });
   //Vérification de la validité d'un email
-  let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if(!emailRegex.test(email)) {
+  let emailRegex = /^[\w\.]+@([\w-]+\.)+[a-zA-Z]{2,4}$/;
+  if(!emailRegex.test(email.value)) {
     email.nextElementSibling.innerHTML = email.dataset.error;
     email.style.border = borderError;
     isValid = false;
@@ -101,3 +101,17 @@ function validate() {
   }
   return false;
 }
+
+//Bloquage des dates ultérieures à la date actuelle pour la date de naissance
+function dateBlocking()
+{
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0'); 
+  let yyyy = today.getFullYear();
+  today = yyyy + '-' + mm + '-' + dd;
+  document.getElementById("birthdate").setAttribute("max", today);
+}
+
+//Lancement de la function au chargement de la page
+window.onload=dateBlocking;
