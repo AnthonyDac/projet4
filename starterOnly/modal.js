@@ -33,61 +33,52 @@ function closeModal() {
 function validate() {
   isValid = true;
   //déclaration des éléments du DOM
-  let name = document.querySelector('#first');
-  let lastname = document.querySelector('#last');
-  let email = document.querySelector('#email');
-  let date = document.querySelector('#birthdate');
-  let quantity = document.querySelector('#quantity');
-  let checkbox = document.querySelector('#checkbox1');
-  let consent1 = document.querySelector('#consent1');
-  let checkedRadio = document.querySelector("input[name='location']:checked");
-  let warningRadio = document.querySelector('#warningRadio');
-  let form = document.querySelector('#form');
-  let thanks = document.querySelector('#thanks');
-  //Vérification si le prénom contient au moins 2 lettres
-  if(!name.value || name.value.length < 2) {
-    name.nextElementSibling.innerHTML = name.dataset.error;
-    name.style.border ="2px solid #e54858";
-    isValid = false;
-  } else {
-    name.nextElementSibling.innerHTML = '';
-    name.style.border ="2px solid transparent"; 
-  }
-  //Vérification si le nom contient au moins 2 lettres
-  if(!lastname.value || lastname.value < 2) {
-    lastname.nextElementSibling.innerHTML = lastname.dataset.error;
-    lastname.style.border ="2px solid #e54858";
-    isValid = false;
-  } else {
-    lastname.nextElementSibling.innerHTML = '';
-    lastname.style.border ="2px solid transparent"; 
-  }
+  const name = document.querySelector('#first');
+  const lastname = document.querySelector('#last');
+  const email = document.querySelector('#email');
+  const date = document.querySelector('#birthdate');
+  const quantity = document.querySelector('#quantity');
+  const checkbox = document.querySelector('#checkbox1');
+  const consent1 = document.querySelector('#consent1');
+  const checkedRadio = document.querySelector("input[name='location']:checked");
+  const warningRadio = document.querySelector('#warningRadio');
+  const form = document.querySelector('#form');
+  const thanks = document.querySelector('#thanks');
+  const borderReset = "2px solid transparent";
+  const borderError = "2px solid #e54858";
+  const identity = [name,lastname];
+  const informations = [date,quantity]
+  //Vérification si les nom et prénoms contiennent au moins 2 caractères
+  identity.forEach(element => {
+    if(element.value < 2) {
+      element.nextElementSibling.innerHTML = element.dataset.error;
+      element.style.border = borderError;
+      isValid = false;
+    } else {
+      element.nextElementSibling.innerHTML = '';
+      element.style.border = borderReset;
+    }
+  });
+  //Vérification si la date de naissance et la quantity sont corrects
+  informations.forEach(element => {
+    if(!element.value) {
+      element.nextElementSibling.innerHTML = element.dataset.error;
+      element.style.border = borderError;
+      isValid = false;
+    } else {
+      element.nextElementSibling.innerHTML = '';
+      element.style.border = borderReset;
+    }
+  });
   //Vérification si un email est inséré
-  if(!email.value) {
+  let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if(!emailRegex.test(email)) {
     email.nextElementSibling.innerHTML = email.dataset.error;
-    email.style.border ="2px solid #e54858";
+    email.style.border = borderError;
     isValid = false;
   } else {
     email.nextElementSibling.innerHTML = '';
-    email.style.border ="2px solid transparent"; 
-  }
-  //Vérification si une date de naissance est envoyée
-  if(!date.value) {
-    date.nextElementSibling.innerHTML = date.dataset.error;
-    date.style.border ="2px solid #e54858";
-    isValid = false;
-  } else {
-    date.nextElementSibling.innerHTML = '';
-    date.style.border ="2px solid transparent"; 
-  }
-  //Vérification si une donnée concernant le nombre de tournoi est envoyée
-  if(!quantity.value) {
-    quantity.nextElementSibling.innerHTML = quantity.dataset.error;
-    quantity.style.border ="2px solid #e54858";
-    isValid = false;
-  } else {
-    quantity.nextElementSibling.innerHTML = '';
-    quantity.style.border ="2px solid transparent"; 
+    email.style.border = borderReset; 
   }
   //Vérification si une ville est choisie
   if(!checkedRadio) {
