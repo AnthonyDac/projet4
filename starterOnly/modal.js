@@ -70,7 +70,7 @@ function validate() {
       element.style.border = borderReset;
     }
   });
-  //Vérification si un email est inséré
+  //Vérification de la validité d'un email
   let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if(!emailRegex.test(email)) {
     email.nextElementSibling.innerHTML = email.dataset.error;
