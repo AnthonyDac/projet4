@@ -50,7 +50,7 @@ function validate() {
   const informations = [date,quantity];
   //Vérification si les nom et prénoms contiennent au moins 2 caractères
   identity.forEach(element => {
-    if(element.value < 2) {
+    if(element.value.length < 2) {
       element.nextElementSibling.innerHTML = element.dataset.error;
       element.style.border = borderError;
       isValid = false;
